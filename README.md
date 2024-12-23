@@ -62,17 +62,56 @@ To scope a new target, navigate to the star icon next to Scan Targets.
 Now that we have created our task and target, we can begin scanning our ports and network.  To start the task navigate to the start icon under Actions.
 ![Screenshot 2024-12-22 222106](https://github.com/user-attachments/assets/8a8e4d95-f5fc-4075-9951-f18f479a9035)
 
-Results of our Scan
+### Results of our Scan
 
 ![image](https://github.com/user-attachments/assets/c303f405-94f5-4693-8709-f841600ce7ce)
 
 After the basic host and task information OpenVAS will report on each of the vulnerabilities found. In the screenshot below, the vulnerability breakdown can give a lot of information. We can gather a summary of the vulnerability, detection details, mitigation details, and method of detection.
 ![image](https://github.com/user-attachments/assets/22c1f637-f9e5-4f03-b22c-a2a88b504f06)
 
+</details>
+
+<details><summary><b>Remediate Vulnerabilies</b></summary>
+- We need to disable TCP timestamps based on the vulnerability report
+
+Edit sysctl.conf:
+1. Open the /etc/sysctl.conf file in the ubuntu terminal by running; sudo nano /etc/sysctl.conf.
+
+2. Disable TCP Timestamps: Add or update the following line: net.ipv4.tcp_timestamps = 0
+
+  ![image](https://github.com/user-attachments/assets/797b521f-160d-45ae-8f07-9d4fafc68a68)
+
+![image](https://github.com/user-attachments/assets/73204995-1b9d-46a2-8f6d-49bd68ed1307)
+
+Save the file and run: sudo sysctl -p. This ensures the new setting takes effect immediately.
+
+![image](https://github.com/user-attachments/assets/b8523341-dc18-44d7-9c08-29847df9a137)
 
 </details>
 
 
+<details><summary><b>Verification</b></summary>
+After applying the changes, you can verify whether TCP timestamps are disabled: We can do this by running sysctl net.ipv4.tcp_timestamps
+
+![image](https://github.com/user-attachments/assets/21c444e2-b3e6-4476-b3fc-dda631ca2770)
+
+Which returned as " net.ipv4.tcp_timestamps = 0." This means we have successfully disabled TCP timestamps in the systems's TCP/IP stack
+</details>
+<details><summary><b>Reflection</b></summary>
+
+  This lab provided hands-on experience in setting up and using a vulnerability management scanner with OpenVAS. It highlighted the importance of proactive vulnerability management and the impact of misconfigurations and outdated software on system security.
+
+Configuring OpenVAS for unauthenticated scans and performing the scans allowed me to identify vulnerabilities and understand the need for regular scanning to detect security risks.
+
+Implementing credentialed scans and comparing the results with unauthenticated scans demonstrated the value of using proper credentials for accurate vulnerability identification.
+Remediating vulnerabilities by disabling TCP timestamps and verifying the changes through subsequent scans reinforced the importance of timely actions to reduce the attack surface.
+</details>
+
+<details><summary><b>Conclusion</b></summary>
+
+This lab enhanced my understanding of vulnerability management and the continuous effort required for maintaining a secure environment. It emphasized the significance of proactive security practices, timely remediation, and the value of comprehensive scanning approaches.
+
+I now possess practical knowledge and skills in vulnerability management using OpenVAS, ready to apply them in real-world scenarios and contribute to effective system protection.
 
 </details>
 
